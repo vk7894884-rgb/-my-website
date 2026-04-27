@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MR_X_VIKAS__ Hacker Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: monospace;
+      background: black;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 28px;
+      text-shadow: 0 0 10px #00ffcc;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #00ffcc;
+      padding: 25px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+    input {
+      padding: 12px;
+      width: 90%;
+      font-size: 18px;
+      background: black;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #00ffcc;
+      border: none;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 22px;
+    }
+
+    .big { color: #00ff00; }
+    .small { color: #ff4444; }
+
+    /* RULE BOX */
+    .rules {
+      margin: 40px auto;
+      width: 90%;
+      max-width: 400px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #00ffcc;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 15px #00ffcc;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .rules h3 {
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #00ffcc;
+    }
+
+    /* SCAN LINE */
+    .scan {
+      position: fixed;
+      width: 100%;
+      height: 2px;
+      background: #00ffcc;
+      animation: scan 3s linear infinite;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+<div class="scan"></div>
+
+<div class="container">
+  <div class="title">⚡ MR_X_VIKAS__ HACKER ⚡</div>
+
+  <div class="card">
+    <p>Enter Last 3 Digits</p>
+    <input type="number" id="digits" placeholder="e.g. 472">
+
+    <br>
+    <button onclick="predict()">RUN ANALYSIS</button>
+
+    <div class="result" id="output"></div>
+  </div>
+
+  <!-- RULE BOX -->
+  <div class="rules">
+    <h3>⚠ RULES</h3>
+    <p><b>Rule no.1:</b> Jab 2 level loss ho jaye to 3rd level me hack ka opposite bet karna hai.</p>
+    <p><b>Rule no.2:</b> Jab 3rd level bhi loss ho jaye to dubara hack ke hisab se hi play karna hai, but 3 level hone ke baad first level ka amount 2× use karna hai.</p>
+  </div>
+
+</div>
+
+<script>
+// MATRIX EFFECT
+let canvas = document.getElementById("matrix");
+let ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+let letters = "01".split("");
+let fontSize = 14;
+let columns = canvas.width / fontSize;
+let drops = [];
+
+for (let x = 0; x < columns; x++) drops[x] = 1;
+
+function draw() {
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ffcc";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    let text = letters[Math.floor(Math.random()*letters.length)];
+    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+    if (drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+      drops[i] = 0;
+
+    drops[i]++;
+  }
+}
+setInterval(draw, 33);
+
+// PREDICTION
+function predict() {
+  let input = document.getElementById("digits").value;
+
+  if (input.length !== 3) {
+    document.getElementById("output").innerHTML = "⚠ Enter exactly 3 digits!";
+    return;
+  }
+
+  let lastDigit = parseInt(input.slice(-1));
+
+  let result = "";
+  let nextNumber = "";
+
+  switch(lastDigit) {
+    case 0: result = "BIG"; nextNumber = 1; break;
+    case 1: result = "BIG"; nextNumber = 2; break;
+    case 2: result = "BIG"; nextNumber = 3; break;
+    case 3: result = "BIG"; nextNumber = 4; break;
+    case 4: result = "BIG"; nextNumber = 0; break;
+    case 5: result = "SMALL"; nextNumber = 6; break;
+    case 6: result = "SMALL"; nextNumber = 7; break;
+    case 7: result = "SMALL"; nextNumber = 8; break;
+    case 8: result = "SMALL"; nextNumber = 9; break;
+    case 9: result = "SMALL"; nextNumber = 5; break;
+  }
+
+  let colorClass = (result === "BIG") ? "big" : "small";
+
+  document.getElementById("output").innerHTML =
+    "Prediction: <span class='" + colorClass + "'>" + result + "</span><br>Next: " + nextNumber;
+}
+</script>
+
+</body>
+</html>
