@@ -131,8 +131,13 @@
   <!-- RULE BOX -->
   <div class="rules">
     <h3>⚠ RULES</h3>
-    <p><b>Rule no.1:</b> Jab 2 level loss ho jaye to 3rd level me hack ka opposite bet karna hai.</p>
-    <p><b>Rule no.2:</b> Jab 3rd level bhi loss ho jaye to dubara hack ke hisab se hi play karna hai, but 3 level hone ke baad first level ka amount 2× use karna hai.</p>
+    <p><b>Rule no.1:</b> हमेशा लेवल के हिसाब से ही प्ले करना है। और एक बार में सिर्फ 10-12 विनिंग लेनी है। .</p>
+    <p><b>Rule no.2:</b> 3rd लेवल लॉस के बाद हमेशा 1st लेवल से प्ले करे लेकिन अमाउंट 2× करना है। जैसे - 
+level 1 (₹10)
+Level 2 (₹20)
+Level 3 (₹40)
+Level 1 (₹20)
+Level 2 (₹40)</p>
   </div>
 
 </div>
@@ -186,16 +191,16 @@ function predict() {
   let nextNumber = "";
 
   switch(lastDigit) {
-    case 0: result = "BIG"; nextNumber = 1; break;
-    case 1: result = "BIG"; nextNumber = 2; break;
-    case 2: result = "BIG"; nextNumber = 3; break;
-    case 3: result = "BIG"; nextNumber = 4; break;
-    case 4: result = "BIG"; nextNumber = 0; break;
-    case 5: result = "SMALL"; nextNumber = 6; break;
-    case 6: result = "SMALL"; nextNumber = 7; break;
-    case 7: result = "SMALL"; nextNumber = 8; break;
-    case 8: result = "SMALL"; nextNumber = 9; break;
-    case 9: result = "SMALL"; nextNumber = 5; break;
+    case 0: result = "BIG"; nextNumber = 1,4; break;
+    case 1: result = "BIG"; nextNumber = 2,3; break;
+    case 2: result = "BIG"; nextNumber = 0,3; break;
+    case 3: result = "BIG"; nextNumber = 3,4; break;
+    case 4: result = "BIG"; nextNumber = 0,1; break;
+    case 5: result = "SMALL"; nextNumber = 6,9; break;
+    case 6: result = "SMALL"; nextNumber = 7,8; break;
+    case 7: result = "SMALL"; nextNumber = 5,8; break;
+    case 8: result = "SMALL"; nextNumber = 6,9; break;
+    case 9: result = "SMALL"; nextNumber = 5,6; break;
   }
 
   let colorClass = (result === "BIG") ? "big" : "small";
